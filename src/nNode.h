@@ -1,11 +1,11 @@
 #ifndef NNODE_H
 #define NNODE_H
-
-typedef struct t_nNode {
-	struct phone* number;
-	enum place {Home, Cell, School} type;
+#include "first.h"
+struct t_nNode {
+	struct t_phone* number;
+	place type;
 	int primary;
 	struct t_nNode* next;
-} nNode;
+};
 
 #endif

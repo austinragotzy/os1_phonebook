@@ -1,12 +1,12 @@
 #ifndef PHONE_H
 #define PHONE_H
 
-typedef struct t_phone {
+struct t_phone {
 	char* number;
-	struct pNode* owner;
-} phone;
+	pNode* owner;
+};
 
 int addphone(char *number, phone **pArray, int i);
-int linkphone(phone *num, struct person *per);
+int linkphone(phone *num, person *per);
 phone *searchphone(phone **pArray);
 #endif
