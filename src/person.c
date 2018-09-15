@@ -1,7 +1,7 @@
 
 #include "all.h"
 
-int addperson(char *first, char *last, char *nick, person **pArray, int i){
+int addperson(char *first, char *middle, char *last, char *nick, person **pArray, int i){
 	pArray[i] = malloc(sizeof(person));
 	pArray[i]->first = malloc(strlen(first)+1);
 	pArray[i]->last = malloc(strlen(last)+1);
@@ -32,4 +32,21 @@ int linkperson(person *per, phone *num, place type, int primary){
 	}
 
 	return 0;
+}
+
+int searchperson(char *target, person **pArray){
+	int i = 0;
+	int index = -1;
+	int trigger = 1;
+// have to make this work with other names
+	while(pArray[i]&&trigger){
+		if(strncmp(pArray[i]->first, target, 32)==0){
+			index = i;
+			trigger = 0;
+		}
+
+		i++;
+	}
+
+	return index;
 }

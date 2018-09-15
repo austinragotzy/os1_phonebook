@@ -8,5 +8,5 @@ struct t_phone {
 
 int addphone(char *number, phone **pArray, int i);
 int linkphone(phone *num, person *per);
-phone *searchphone(phone **pArray);
+int searchphone(char *target, phone **pArray);
 #endif

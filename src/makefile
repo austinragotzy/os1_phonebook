@@ -2,18 +2,18 @@ CC = gcc
 
 CFLAGS = -g -Wall -pedantic
 #CFLAGS = -O -Wall -pedantic
-main : person.o pNode.h phone.o nNode.h first.h
+main : person.o pNode.h phone.o readfile.o nNode.h first.h
 
-person.o phone.o : all.h
+person.o phone.o readfile.o: all.h
 
-all.h: first.h person.h phone.h pNode.h nNode.h
+all.h: first.h person.h phone.h pNode.h nNode.h readfile.h
 	touch all.h
 
 clean:
 	rm -f *.o core main
 
 run: main
-	./main
+	./main input.html
 
 debug:
-	gdb ./debug
+	gdb ./main input.html
