@@ -13,6 +13,6 @@ int addperson(char *first, char *middle, char *last, char *nick, person **pArray
 int linkperson(person *per, phone *num, place type, int primary);
 int searchperson(char *target, person **pArray);
 int deleteperson(person **perArray);
-int deletenode(nNode *node);
+int deletennode(nNode *node);
 
 #endif

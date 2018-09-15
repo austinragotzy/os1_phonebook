@@ -57,7 +57,7 @@ int deleteperson(person **perArray){
 	int i=0;
 	while(perArray[i]){
 		if(perArray[i]->number){
-			deletenode(perArray[i]->number);
+			deletennode(perArray[i]->number);
 		}
 		free(perArray[i]->first);
 		free(perArray[i]->middle);
@@ -69,9 +69,9 @@ int deleteperson(person **perArray){
 	return 0;
 }
 
-int deletenode(nNode *node){
+int deletennode(nNode *node){
 	if(node->next){
-		deletenode(node->next);
+		deletennode(node->next);
 	}
 	free(node);
 	return 0;

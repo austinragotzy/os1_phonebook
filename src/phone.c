@@ -49,3 +49,24 @@ int searchphone(char *target, phone **pArray){
 
 	return index;
 }
+
+int deletephone(phone **numArray){
+	int i=0;
+	while(numArray[i]){
+		if(numArray[i]->owner){
+			deletepnode(numArray[i]->owner);
+		}
+		free(numArray[i]->number);
+		free(numArray[i]);
+		i++;
+	}
+	return 0;
+}
+
+int deletepnode(pNode *node){
+	if(node->next){
+		deletepnode(node->next);
+	}
+	free(node);
+	return 0;
+}
