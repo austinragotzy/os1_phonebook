@@ -11,7 +11,7 @@ struct t_person {
 
 int addperson(char *first, char *middle, char *last, char *nick, person **pArray, int i);
 int linkperson(person *per, phone *num, place type, int primary);
-int searchperson(char *target, person **pArray);
+int searchperson(char *ftarget, char *ltarget, person **pArray);
 int deleteperson(person **perArray);
 int deletennode(nNode *node);
 

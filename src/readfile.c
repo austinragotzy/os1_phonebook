@@ -1,8 +1,7 @@
 #include "all.h"
 
-int readfile(char *file, person **pArray, phone **nArray){
+int readfile(FILE *fp, person **pArray, phone **nArray){
 
-	FILE *fp = fopen(file, "r");
 	char *buf1 = malloc(512);
 	char *buf;
 	int pindex = 0;
@@ -18,7 +17,6 @@ int readfile(char *file, person **pArray, phone **nArray){
 				parceplacePhone(buf, pArray, nArray, pindex, nindex);
 				nindex++;
 			}else{//when the line is a name
-				//parce that line and put it into the struct and stuff
 				parceplacePerson(buf, pArray, pindex);
 				pindex++;
 			}

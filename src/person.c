@@ -36,17 +36,27 @@ int linkperson(person *per, phone *num, place type, int primary){
 	return 0;
 }
 
-int searchperson(char *target, person **pArray){
+int searchperson(char *ftarget, char *ltarget, person **pArray){
 	int i = 0;
 	int index = -1;
 	int trigger = 1;
-// have to make this work with other names
+
 	while(pArray[i]&&trigger){
-		if(strncmp(pArray[i]->first, target, 32)==0){
+		if(strncmp(pArray[i]->first, ftarget, 32)==0){
+			if(strncmp(pArray[i]->last, ltarget, 32)==0){
+				index = i;
+				trigger = 0;
+			}
+		}
+
+		i++;
+	}
+	i=0;
+	while(pArray[i]&&trigger){
+		if(strncmp(pArray[i]->nick, ftarget, 32)==0){
 			index = i;
 			trigger = 0;
 		}
-
 		i++;
 	}
 
