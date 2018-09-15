@@ -16,4 +16,4 @@ run: main
 	./main input.html
 
 debug:
-	gdb ./main input.html
+	gdb ./main 

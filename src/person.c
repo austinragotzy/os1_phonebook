@@ -4,9 +4,11 @@
 int addperson(char *first, char *middle, char *last, char *nick, person **pArray, int i){
 	pArray[i] = malloc(sizeof(person));
 	pArray[i]->first = malloc(strlen(first)+1);
+	pArray[i]->middle = malloc(strlen(middle)+1);
 	pArray[i]->last = malloc(strlen(last)+1);
 	pArray[i]->nick = malloc(strlen(nick)+1);
 	strcpy(pArray[i]->first, first);
+	strcpy(pArray[i]->middle, middle);
 	strcpy(pArray[i]->last, last);
 	strcpy(pArray[i]->nick, nick);
 	return 0;
@@ -49,4 +51,28 @@ int searchperson(char *target, person **pArray){
 	}
 
 	return index;
+}
+
+int deleteperson(person **perArray){
+	int i=0;
+	while(perArray[i]){
+		if(perArray[i]->number){
+			deletenode(perArray[i]->number);
+		}
+		free(perArray[i]->first);
+		free(perArray[i]->middle);
+		free(perArray[i]->last);
+		free(perArray[i]->nick);
+		free(perArray[i]);
+		i++;
+	}
+	return 0;
+}
+
+int deletenode(nNode *node){
+	if(node->next){
+		deletenode(node->next);
+	}
+	free(node);
+	return 0;
 }
