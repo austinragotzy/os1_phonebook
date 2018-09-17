@@ -21,6 +21,7 @@ int main(int argc, char * argv[]){
 		strncpy(buf+strlen(buf)-1, "\0", 2);
 	}
 	readfile(fp, perArray, numArray);
+	fclose(fp);
 	while((mode = uistart())<3){
 		uisearch(mode, perArray, numArray);
 	}

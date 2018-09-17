@@ -14,8 +14,9 @@ int readfile(FILE *fp, person **pArray, phone **nArray){
 		}else{
 			strsep(&buf, "	");
 			if(*buf=='('){//when the line is a phone number
-				parceplacePhone(buf, pArray, nArray, pindex, nindex);
-				nindex++;
+				if(parceplacePhone(buf, pArray, nArray, pindex, nindex)){
+					nindex++;
+				}
 			}else{//when the line is a name
 				parceplacePerson(buf, pArray, pindex);
 				pindex++;
@@ -23,7 +24,6 @@ int readfile(FILE *fp, person **pArray, phone **nArray){
 		}
 	}
 	free(buf1);
-	fclose(fp);
 	return 0;
 }
 
@@ -51,10 +51,10 @@ int parceplacePerson(char *buf, person **pArray, int pindex){
 	//add it to the array
 	addperson(first, middle, last, nick, pArray, pindex);
 	//free the mem
-	//free(temp);
 	free(first);
 	free(middle);
 	free(last);
+	free(nick);
 	return 0;
 }
 
@@ -64,6 +64,7 @@ int parceplacePhone(char *buf, person **pArray, phone **nArray, int pindex, int 
 	int primary;
 	char *temp;
 	int exindex;
+	int ret;
 	//parce phone number
 	strncpy(number, buf, 14);
 	//parce phone type
@@ -88,11 +89,13 @@ int parceplacePhone(char *buf, person **pArray, phone **nArray, int pindex, int 
 	if((exindex = addphone(number, nArray, nindex))<0){//if the number isnt there
 		linkphone(nArray[nindex], pArray[pindex-1]);
 		linkperson(pArray[pindex-1], nArray[nindex], type, primary);
+		ret = 1;
 	}else{//if the number is there already
 		linkphone(nArray[exindex], pArray[pindex-1]);
 		linkperson(pArray[pindex-1], nArray[exindex], type, primary);
+		ret = 0;
 	}
 	//free the mem
 	free(number);
-	return 0;
+	return ret;
 }

@@ -16,6 +16,7 @@ int linkphone(phone *num, person *per){
 	// make a pNode to insert into the list
 	pNode *p = malloc(sizeof(pNode));
 	p->person = per;
+	p->next = NULL;
 
 	if(!num->owner){// if no pNodes are attached add to head
 		num->owner = p;

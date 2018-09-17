@@ -17,3 +17,6 @@ run: main
 
 debug:
 	gdb ./main
+
+valgrind:
+	valgrind ./main

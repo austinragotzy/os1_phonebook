@@ -20,6 +20,7 @@ int linkperson(person *per, phone *num, place type, int primary){
 	n->number = num;
 	n->type = type;
 	n->primary = primary;
+	n->next = NULL;
 
 	if(!per->number){// if no number nodes attatched add a head
 		per->number = n;
