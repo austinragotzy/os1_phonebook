@@ -6,4 +6,7 @@ struct t_pNode {
 	struct t_pNode* next;
 };
 
+int queueper(pNode *p, phone *num);
+int dequeueallper(pNode *node);
+
 #endif

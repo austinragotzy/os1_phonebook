@@ -7,5 +7,7 @@ struct t_nNode {
 	int primary;
 	struct t_nNode* next;
 };
+int queuenum(nNode *n, person *per);
+int dequeueallnum(nNode *node);
 
 #endif

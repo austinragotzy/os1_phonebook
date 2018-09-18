@@ -22,17 +22,7 @@ int linkperson(person *per, phone *num, place type, int primary){
 	n->primary = primary;
 	n->next = NULL;
 
-	if(!per->number){// if no number nodes attatched add a head
-		per->number = n;
-
-	}else{// if numbers are there already attatch it to the tail
-		nNode *stepper = per->number;// stepper is to iterate through the list
-		while(stepper->next){// steps through the list
-			stepper = stepper->next;
-		}
-
-		stepper->next = n;//once we reach the current last element put one after it
-	}
+	queuenum(n, per);
 
 	return 0;
 }
@@ -68,7 +58,7 @@ int deleteperson(person **perArray){
 	int i=0;
 	while(perArray[i]){
 		if(perArray[i]->number){
-			deletennode(perArray[i]->number);
+			dequeueallnum(perArray[i]->number);
 		}
 		free(perArray[i]->first);
 		free(perArray[i]->middle);
@@ -77,13 +67,5 @@ int deleteperson(person **perArray){
 		free(perArray[i]);
 		i++;
 	}
-	return 0;
-}
-
-int deletennode(nNode *node){
-	if(node->next){
-		deletennode(node->next);
-	}
-	free(node);
 	return 0;
 }

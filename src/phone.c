@@ -17,19 +17,7 @@ int linkphone(phone *num, person *per){
 	pNode *p = malloc(sizeof(pNode));
 	p->person = per;
 	p->next = NULL;
-
-	if(!num->owner){// if no pNodes are attached add to head
-		num->owner = p;
-
-	}else{// if already has owners put it on the tail
-		pNode *stepper = num->owner;// stepper is to itterate through the list
-		while(stepper->next){// step through the list
-			stepper = stepper->next;
-		}
-
-		stepper->next = p;//once we reach the current last element put one after it
-	}
-
+	queueper(p, num);
 	return 0;
 }
 
@@ -55,19 +43,11 @@ int deletephone(phone **numArray){
 	int i=0;
 	while(numArray[i]){
 		if(numArray[i]->owner){
-			deletepnode(numArray[i]->owner);
+			dequeueallper(numArray[i]->owner);
 		}
 		free(numArray[i]->number);
 		free(numArray[i]);
 		i++;
 	}
-	return 0;
-}
-
-int deletepnode(pNode *node){
-	if(node->next){
-		deletepnode(node->next);
-	}
-	free(node);
 	return 0;
 }
