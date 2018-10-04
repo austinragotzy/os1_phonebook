@@ -1,12 +1,28 @@
 #include "all.h"
 
+int openfile(int argc,char *argv[], FILE **fp){
+	char *buf = malloc(64);
 
-int readfile(FILE *fp, person **pArray, phone **nArray){
+	if(argc!=2){
+		printf("enter the file:\n");
+		fgets(buf, 64, stdin);
+		strncpy(buf+strlen(buf)-1, "\0", 2);
+	}else{
+		strncpy(buf, argv[1], 64);
+	}
+	while(!(*fp = fopen(buf, "r"))){
+		printf("file not found renter the file:\n");
+		fgets(buf, 64, stdin);
+		strncpy(buf+strlen(buf)-1, "\0", 2);
+	}
+	free(buf);
+	return 0;
+}
+
+int readfile(FILE *fp, person **pArray, int *perc, phone **nArray, int *phoc){
 
 	char *buf1 = malloc(512);
 	char *buf;
-	int pindex = 0;
-	int nindex = 0;
 
 	while(fgets(buf1, 512, fp)){
 		buf = buf1;
@@ -15,12 +31,12 @@ int readfile(FILE *fp, person **pArray, phone **nArray){
 		}else{
 			//strsep(&buf, "	");
 			if(*buf=='('){//when the line is a phone number
-				if(parceplacePhone(buf, pArray, nArray, pindex, nindex)){
-					nindex++;
+				if(parceplacePhone(buf, pArray, nArray, *perc, *phoc)){
+					(*phoc)++;
 				}
 			}else{//when the line is a name
-				parceplacePerson(buf, pArray, pindex);
-				pindex++;
+				parceplacePerson(buf, pArray, *perc);
+				(*perc)++;
 			}
 		}
 	}
@@ -48,7 +64,7 @@ int parceplacePerson(char *buf, person **pArray, int pindex){
 	//parce nickname
 	strsep(&buf, " ");
 	strncpy(nick, buf, 32);
-	strncpy(nick+strlen(nick)-1, "\0", 2);
+	strncpy(nick+strlen(nick)-2, "\0", 2);
 	//add it to the array
 	addperson(first, middle, last, nick, pArray, pindex);
 	//free the mem
