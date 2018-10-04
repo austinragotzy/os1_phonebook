@@ -1,5 +1,6 @@
 #include "all.h"
 
+
 int readfile(FILE *fp, person **pArray, phone **nArray){
 
 	char *buf1 = malloc(512);
@@ -12,7 +13,7 @@ int readfile(FILE *fp, person **pArray, phone **nArray){
 		if(*buf=='<'){
 			// dont do anything with what you have go to the next line
 		}else{
-			strsep(&buf, "	");
+			//strsep(&buf, "	");
 			if(*buf=='('){//when the line is a phone number
 				if(parceplacePhone(buf, pArray, nArray, pindex, nindex)){
 					nindex++;
